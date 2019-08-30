@@ -54,22 +54,22 @@ app.post('/register', (req, res) => {
 
 app.get('/profile/:id', (req, res) => {
     const { id } = req.params;
-    const requestedUser = database.users.filter(user => user.id == id)
-    let found = false;
-    // database.users.forEach(user => {
-    //     if (user.id === id) {
-    //          found = true;
-    //         return res.json(user);
-    //     } 
-    //      if (!found) {
-    //          res.status(404).json('no such user');
-    //      }   
-    // })
-    
+    const requestedUser = database.users.filter(user => user.id === id)
     if (requestedUser.length) {
-        res.json(requestedUser);
+        res.json(requestedUser[0]);
     } else {
-        res.status(404).json('no such user');
+        res.status(404).json('user not found');
+    }
+})
+
+app.put('/image', (req, res) => {
+    const { id } = req.body;
+    const requestedUser = database.users.filter(user => user.id === id)
+    if (requestedUser.length) {
+        requestedUser[0].entries++
+        res.json(requestedUser[0].entries);
+    } else {
+        res.status(404).json('user not found');
     }
 })
 
@@ -79,11 +79,3 @@ app.listen(3000, () => {
 })
 
 
-/*
-/ --> res = this is working
-/signin --> POST  success/fail
-/register --> POST = user
-/profile/:userId --> GET = user
-/image --> PUT --> user
-
-*/
