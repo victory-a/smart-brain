@@ -9,10 +9,11 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
+require('dotenv').config()
 
 
 const app = new Clarifai.App({
-  apiKey: '830bb0782ee44e8ba23f1dc6b43697bf'
+  apiKey: process.env.REACT_APP_API_KEY
 });
 
 const particlesOptions = {
@@ -23,7 +24,7 @@ const particlesOptions = {
         enable: true,
         value_area: 1000
       }
-    }
+    } 
   }
 }
 
